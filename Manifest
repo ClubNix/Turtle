@@ -1,0 +1,2 @@
+Main-Class: Server
+Class-Path: /usr/share/java/jzmq.jar
