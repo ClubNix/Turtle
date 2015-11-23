@@ -1,2 +1,3 @@
 Main-Class: Server
 Class-Path: /usr/share/java/jzmq.jar
+Class-Path: /usr/share/java/jeromq.jar
