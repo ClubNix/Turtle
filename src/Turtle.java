@@ -1,17 +1,17 @@
-public class Turtle{
+public class Turtle {
 	private double food;	//!< satiated percent
 	private double life;	//!< healt percent
 
-	public Turtle(){
+	public Turtle() {
 		this.food = 50;
 		this.life = 100;
 	}
 
-	public bool reproduce(Turtle wife){
-		if(this.food >= 85.0 && wife.food >= 85.0){
+	public bool reproduce(Turtle wife) {
+		if (this.food >= 85.0 && wife.food >= 85.0) {
 			// reproduction state ("game engine" can create another turtle)
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
