@@ -23,8 +23,8 @@ public class Server {
 		do {
 			message = socket.recvStr(StandardCharsets.UTF_8);
 
-			TurtleAction action = lexer.getActionMap().get(message);
-			String response = action != null ? action.action(turtle) : "unknow " + message;
+			TurtleAction action = lexer.getAction(message);
+			String response = action != null ? action.perform(turtle) : "unknow " + message;
 
 			//String response = message;
 			socket.send(response);
