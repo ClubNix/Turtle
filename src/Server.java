@@ -1,4 +1,5 @@
 import org.zeromq.ZMQ;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -24,11 +25,11 @@ public class Server {
 	public void run() {
 		String message;
 		do {
-			message = socket.recvStr();
+			message = socket.recvStr(StandardCharsets.UTF_8);
 			System.out.println(message);
-			
+
 			String response = lexer.getActionMap().get(message).action(turtle);
-			
+
 			//String response = message;
 			socket.send(response);
 		} while (!message.equals("quit"));

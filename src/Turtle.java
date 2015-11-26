@@ -39,6 +39,6 @@ public class Turtle {
 	}
 
 	public Position getPosition() {
-		return new Position(this.position); // const Position* getPosition();
+		return new Position(this.position); // const Position* getPosition(); (immutable position)
 	}
 }
