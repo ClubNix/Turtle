@@ -8,12 +8,15 @@ print "Connecting to hello world server…"
 local requester = context:socket(zmq.REQ)
 requester:connect("tcp://localhost:5555")
 
-for requestNbr=0,9 do
-	local request = "Hello"
-	print("Sending Hello "..requestNbr)
-	requester:send(request)
-
-	local reply = requester:recv()
-	print(reply)
+function sendrecv(message)
+	requester:send(message)
+	reply = requester:recv()
+	print(message.." -> "..reply)
 end
+
+sendrecv("position")
+sendrecv("up")
+sendrecv("position")
+
 requester:send("quit")
+
