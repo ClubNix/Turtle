@@ -3,8 +3,6 @@
 local zmq = require "lzmq"
 local context = zmq.context()
 
-print "Connecting to hello world server…"
-
 local requester = context:socket(zmq.REQ)
 requester:connect("tcp://localhost:5555")
 
@@ -15,6 +13,7 @@ function sendrecv(message)
 end
 
 sendrecv("position")
+sendrecv("miaou")
 sendrecv("up")
 sendrecv("position")
 

@@ -18,17 +18,13 @@ public class Server {
 		this.socket.bind("tcp://*:"+port);
 	}
 
-	private String process(String message) {
-		return "Ok";
-	}
-
 	public void run() {
 		String message;
 		do {
 			message = socket.recvStr(StandardCharsets.UTF_8);
-			System.out.println(message);
 
-			String response = lexer.getActionMap().get(message).action(turtle);
+			TurtleAction action = lexer.getActionMap().get(message);
+			String response = action != null ? action.action(turtle) : "unknow " + message;
 
 			//String response = message;
 			socket.send(response);
