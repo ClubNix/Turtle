@@ -4,7 +4,7 @@ JFLAGS=-Xlint:all -d ${BUILD_DIR} #-Wall -o build/*.class
 
 all:	class turtle.jar
 
-turtle.jar:
+turtle.jar: class Manifest
 	@jar cmf Manifest turtle.jar -C build/ .
 
 class:
