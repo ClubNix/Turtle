@@ -1,14 +1,12 @@
 public class Turtle {
 	private double food;	//!< satiation percent
 	private double life;	//!< health percent
-	private int x;
-	private int y;
+	private Position position;
 
 	public Turtle() {
 		this.food = 50;
 		this.life = 100;
-		this.x = 0;
-		this.y = 0;
+		this.position = new Position();
 	}
 
 	public boolean reproduce(Turtle wife) {
@@ -21,30 +19,26 @@ public class Turtle {
 	}
 
 	public void up() {
-		this.y++;
+		int y = this.position.getY();
+		position.setY(y+1);
 	}
 
 	public void down() {
-		this.y--;
+		int y = this.position.getY();
+		position.setY(y-1);
 	}
 
 	public void left() {
-		this.x--;
+		int x = this.position.getX();
+		position.setY(x-1);
 	}
 
 	public void right() {
-		this.x++;
+		int x = this.position.getX();
+		position.setY(x+1);
 	}
 
-	public int getX() {
-		return this.x;
-	}
-
-	public int getY() {
-		return this.y;
-	}
-
-	public String getStringPosition() {
-		return "x:" + this.x + ",y:" + this.y;
+	public Position getPosition() {
+		return new Position(this.position); // const Position* getPosition();
 	}
 }

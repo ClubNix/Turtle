@@ -31,7 +31,7 @@ public class Lexer {
 		});
 		this.actionMap.put("position", new TurtleAction() {
 			public String action(Turtle turtle) {
-				return turtle.getStringPosition();
+				return turtle.getPosition().toString();
 			}
 		});
 		this.actionMap.put("quit", new TurtleAction() {
