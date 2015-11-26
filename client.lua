@@ -18,5 +18,5 @@ sendrecv("position")
 sendrecv("up")
 sendrecv("position")
 
-requester:send("quit")
+sendrecv("quit")
 

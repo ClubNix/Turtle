@@ -8,25 +8,25 @@ public class Lexer {
 		this.actionMap.put("up", new TurtleAction() {
 			public String action(Turtle turtle) {
 				turtle.up();
-				return "up";
+				return turtle.getPosition().toString();
 			}
 		});
 		this.actionMap.put("down", new TurtleAction() {
 			public String action(Turtle turtle) {
 				turtle.down();
-				return "down";
+				return turtle.getPosition().toString();
 			}
 		});
 		this.actionMap.put("left", new TurtleAction() {
 			public String action(Turtle turtle) {
 				turtle.left();
-				return "left";
+				return turtle.getPosition().toString();
 			}
 		});
 		this.actionMap.put("right", new TurtleAction() {
 			public String action(Turtle turtle) {
 				turtle.right();
-				return "right";
+				return turtle.getPosition().toString();
 			}
 		});
 		this.actionMap.put("position", new TurtleAction() {
@@ -36,7 +36,7 @@ public class Lexer {
 		});
 		this.actionMap.put("quit", new TurtleAction() {
 			public String action(Turtle turtle) {
-				return "quit";
+				return "bye";
 			}
 		});
 	}
