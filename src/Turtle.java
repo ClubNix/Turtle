@@ -30,12 +30,12 @@ public class Turtle {
 
 	public void left() {
 		int x = this.position.getX();
-		position.setY(x-1);
+		position.setX(x-1);
 	}
 
 	public void right() {
 		int x = this.position.getX();
-		position.setY(x+1);
+		position.setX(x+1);
 	}
 
 	public Position getPosition() {
