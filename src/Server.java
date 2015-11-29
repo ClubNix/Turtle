@@ -25,6 +25,7 @@ public class Server {
 
 	public void run() {
 		String message;
+		boolean quit = false;
 		do {
 			message = socket.recvStr();
 			String response = "can't parse "+message;
@@ -35,7 +36,6 @@ public class Server {
             Token t = l.nextToken();
 				switch(t.getType()) {
 					case HELLO:
-						System.out.println("hello player "+idPool);
 						playerList.add(Integer.toString(idPool), new Player(idPool));
 						response = Integer.toString(idPool);
 						idPool++;
@@ -60,14 +60,18 @@ public class Server {
 						}
 						break;
 
+					case QUIT:
+						quit = true;
+                  response = "bye";
+                  break;
+
 					default:
 						break;
 				}
-				System.out.println();
 			}
 			//String response = message;
 			socket.send(response);
-		} while (!message.equals("quit"));
+		} while (quit != true);
 	}
 
 	public static void main(String args[]) {

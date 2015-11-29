@@ -20,6 +20,9 @@ public class Lexer {
 			case "turtle":
 				return new Token(TokenType.TURTLE, token);
 
+			case "quit":
+				return new Token(TokenType.QUIT, token);
+
 			default:
 				return new Token(TokenType.STRING, token);
 		}
