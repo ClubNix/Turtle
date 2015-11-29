@@ -8,6 +8,9 @@ public class Server {
 	private TurtleLexer lexer;
 	private Map map;
 
+	private PlayerList playerList;
+	private int idPool;
+
 	public Server(int port) {
 		turtle = new Turtle();
 		lexer = new TurtleLexer();
@@ -16,40 +19,54 @@ public class Server {
 		this.socket = context.socket(ZMQ.REP);
 		System.out.println("tcp://*:"+port);
 		this.socket.bind("tcp://*:"+port);
+		this.playerList = new PlayerList();
+		int idPool = 0;
 	}
 
 	public void run() {
 		String message;
 		do {
 			message = socket.recvStr();
-
-			TurtleAction action = lexer.getAction(message);
-			String response = action != null ? action.perform(turtle) : "unknow " + message;
-
-			//String response = message;
-			socket.send(response);
-
+			String response = "can't parse "+message;
 			Lexer l = new Lexer(message);
-			while(l.hasNextToken()){
+			Player currentPlayer = null;
+			Turtle currentTurtle = null;
+			while(l.hasNextToken()) {
             Token t = l.nextToken();
-				switch(t.getType()){
+				switch(t.getType()) {
 					case HELLO:
-						System.out.println("HELLO("+t.getValue()+")");
+						System.out.println("hello player "+idPool);
+						playerList.add(Integer.toString(idPool), new Player(idPool));
+						response = Integer.toString(idPool);
+						idPool++;
 						break;
+
 					case TURTLE:
-						System.out.println("TURTLE("+t.getValue()+")");
+						if(currentPlayer != null) {
+							currentTurtle = currentPlayer.getTurtle();
+						}
+						response = "using turtle "+currentTurtle.toString();
 						break;
+
 					case ID:
-						System.out.println("ID("+t.getValue()+")");
+						currentPlayer = playerList.get(t.getValue());
+						response = "using player " + currentPlayer.getId();
 						break;
+
 					case STRING:
-						System.out.println("STRING("+t.getValue()+")");
+						if(currentTurtle != null) {
+							TurtleAction action = lexer.getAction(t.getValue());
+							response = action != null ? action.perform(turtle) : "unknow " + message;
+						}
+						break;
+
+					default:
 						break;
 				}
 				System.out.println();
 			}
-
-
+			//String response = message;
+			socket.send(response);
 		} while (!message.equals("quit"));
 	}
 

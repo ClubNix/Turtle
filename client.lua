@@ -10,12 +10,15 @@ function sendrecv(message)
 	requester:send(message)
 	reply = requester:recv()
 	print(message.." -> "..reply)
+	return reply
 end
 
 sendrecv("position")
 sendrecv("miaou")
 sendrecv("up")
 sendrecv("position")
+id = sendrecv("hello")
+sendrecv(id.." turtle up")
 
 sendrecv("quit")
 

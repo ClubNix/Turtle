@@ -11,12 +11,8 @@ public class Player {
 		this.turtle = turtle;
 	}
 
-	public Player(String name) {
-		this((int)System.currentTimeMillis(), null, name, new Turtle());
-	}
-
-	public Player() {
-		this("");
+	public Player(int id) {
+		this(id, null, "", new Turtle());
 	}
 
 	public int getId() {
