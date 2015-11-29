@@ -28,6 +28,28 @@ public class Server {
 
 			//String response = message;
 			socket.send(response);
+
+			Lexer l = new Lexer(message);
+			while(l.hasNextToken()){
+            Token t = l.nextToken();
+				switch(t.getType()){
+					case HELLO:
+						System.out.println("HELLO("+t.getValue()+")");
+						break;
+					case TURTLE:
+						System.out.println("TURTLE("+t.getValue()+")");
+						break;
+					case ID:
+						System.out.println("ID("+t.getValue()+")");
+						break;
+					case STRING:
+						System.out.println("STRING("+t.getValue()+")");
+						break;
+				}
+				System.out.println();
+			}
+
+
 		} while (!message.equals("quit"));
 	}
 
