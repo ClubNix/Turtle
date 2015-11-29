@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 public class Server {
 	private ZMQ.Context context;
 	private ZMQ.Socket socket;
-	private Turtle turtle;
 	private TurtleLexer lexer;
 	private Map map;
 
@@ -12,7 +11,6 @@ public class Server {
 	private int idPool;
 
 	public Server(int port) {
-		turtle = new Turtle();
 		lexer = new TurtleLexer();
 		map = new Map(10, 10);
 		this.context = ZMQ.context(1);
@@ -56,7 +54,7 @@ public class Server {
 					case STRING:
 						if(currentTurtle != null) {
 							TurtleAction action = lexer.getAction(t.getValue());
-							response = action != null ? action.perform(turtle) : "unknow " + message;
+							response = action != null ? action.perform(currentTurtle) : "unknow " + message;
 						}
 						break;
 

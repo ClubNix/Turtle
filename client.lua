@@ -19,6 +19,10 @@ sendrecv("up")
 sendrecv("position")
 id = sendrecv("hello")
 sendrecv(id.." turtle up")
+sendrecv(id.." turtle up")
+
+id2 = sendrecv("hello")
+sendrecv(id2.." turtle right")
 
 sendrecv("quit")
 
