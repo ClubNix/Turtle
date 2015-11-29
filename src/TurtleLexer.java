@@ -1,9 +1,9 @@
 import java.util.HashMap;
 
-public class Lexer {
+public class TurtleLexer {
 	private HashMap<String, TurtleAction> actionMap;
 
-	public Lexer() {
+	public TurtleLexer() {
 		this.actionMap = new HashMap<String, TurtleAction>();
 		this.actionMap.put("up", new TurtleAction() {
 			public String perform(Turtle turtle) {

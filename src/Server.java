@@ -5,12 +5,12 @@ public class Server {
 	private ZMQ.Context context;
 	private ZMQ.Socket socket;
 	private Turtle turtle;
-	private Lexer lexer;
+	private TurtleLexer lexer;
 	private Map map;
 
 	public Server(int port) {
 		turtle = new Turtle();
-		lexer = new Lexer();
+		lexer = new TurtleLexer();
 		map = new Map(10, 10);
 		this.context = ZMQ.context(1);
 		this.socket = context.socket(ZMQ.REP);
