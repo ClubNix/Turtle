@@ -25,7 +25,7 @@ public class Server {
 		String message;
 		boolean quit = false;
 		do {
-			message = socket.recvStr();
+			message = socket.recvStr(StandardCharsets.UTF_8);
 			String response = "can't parse "+message;
 			Lexer l = new Lexer(message);
 			Player currentPlayer = null;
