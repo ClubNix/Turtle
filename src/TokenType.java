@@ -1,7 +1,15 @@
 public enum TokenType{
-   HELLO,
+	HELLO,
 	TURTLE,
 	ID,
 	STRING,
-	QUIT
+	QUIT,
+	EQUIP,
+	ATTACK,
+	EAT,
+	MULTIPLY,
+	LOOK,
+	WAIT,
+	ACK,
+	DIRECTION
 }
