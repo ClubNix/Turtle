@@ -1,4 +1,4 @@
-#!/usr/bin/lua
+#!/usr/bin/luajit
 
 local zmq = require "lzmq"
 local context = zmq.context()
@@ -23,6 +23,13 @@ sendrecv(id.." turtle up")
 
 id2 = sendrecv("hello")
 sendrecv(id2.." turtle right")
+direction = {'N', 'S', 'E', 'W', 'NE', 'NW', 'SE', 'SW'}
+for i,v in pairs(direction) do
+	sendrecv(v)
+end
+sendrecv("ES")
+sendrecv("F")
+sendrecv("WN")
 
 sendrecv("quit")
 

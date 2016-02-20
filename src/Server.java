@@ -31,7 +31,7 @@ public class Server {
 			Player currentPlayer = null;
 			Turtle currentTurtle = null;
 			while(l.hasNextToken()) {
-            Token t = l.nextToken();
+				Token t = l.nextToken();
 				switch(t.getType()) {
 					case HELLO:
 						playerList.add(Integer.toString(idPool), new Player(idPool));
@@ -54,20 +54,24 @@ public class Server {
 					case STRING:
 						if(currentTurtle != null) {
 							TurtleAction action = lexer.getAction(t.getValue());
+							System.out.println("performed action");
 							response = action != null ? action.perform(currentTurtle) : "unknow " + message;
 						}
 						break;
 
 					case QUIT:
 						quit = true;
-                  response = "bye";
-                  break;
+						response = "bye";
+						break;
+
+					case DIRECTION:
+						response = "direction ok "+t.getValue();
+						break;
 
 					default:
 						break;
 				}
 			}
-			//String response = message;
 			socket.send(response);
 		} while (quit != true);
 	}
