@@ -68,6 +68,14 @@ public class Server {
 						response = "direction ok "+t.getValue();
 						break;
 
+					case LOOK:
+						response = "Il y a " + playerList.size() + " tortues";
+						break;
+
+					case WAIT:
+						response = "En train d'attendre";
+						break;
+
 					default:
 						break;
 				}

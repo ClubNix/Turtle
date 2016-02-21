@@ -31,5 +31,8 @@ sendrecv("ES")
 sendrecv("F")
 sendrecv("WN")
 
+sendrecv("look")
+sendrecv("wait")
+
 sendrecv("quit")
 

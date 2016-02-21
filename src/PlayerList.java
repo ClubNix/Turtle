@@ -14,4 +14,8 @@ public class PlayerList {
 	public void add(String id, Player player) {
 		this.playerList.put(id, player);
 	}
+
+	public int size() {
+		return this.playerList.size();
+	}
 }

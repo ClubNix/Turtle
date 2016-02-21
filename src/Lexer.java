@@ -52,6 +52,10 @@ public class Lexer {
 				type = TokenType.LOOK;
 				break;
 
+			case "wait":
+				type = TokenType.WAIT;
+				break;
+
 			case "ack":
 				type = TokenType.ACK;
 				break;
