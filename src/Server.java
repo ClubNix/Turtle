@@ -26,50 +26,48 @@ public class Server {
 		boolean quit = false;
 		do {
 			message = socket.recvStr(StandardCharsets.UTF_8);
-			String response = "can't parse "+message;
+			String response = "can't parse '"+message+"'";
 			Lexer l = new Lexer(message);
-			Player currentPlayer = null;
 			Turtle currentTurtle = null;
-			while(l.hasNextToken()) {
-				Token t = l.nextToken();
-				switch(t.getType()) {
-					case HELLO:
-						playerList.add(Integer.toString(idPool), new Player(idPool));
-						response = Integer.toString(idPool);
-						idPool++;
-						break;
 
-					case TURTLE:
-						if(currentPlayer != null) {
-							currentTurtle = currentPlayer.getTurtle();
-						}
-						response = "using turtle "+currentTurtle.toString();
-						break;
+			assert l.hasNextToken();
+			Token id = l.nextToken();
+			if(id.getType() == TokenType.HELLO){
+				playerList.add(Integer.toString(idPool), new Player(idPool));
+				response = Integer.toString(idPool);
+				idPool++;
+			}else if(id.getType() == TokenType.ID){
+				Player currentPlayer = playerList.get(id.getValue());
+				while(l.hasNextToken()) {
+					Token t = l.nextToken();
+					switch(t.getType()) {
+						case TURTLE:
+							if(currentPlayer != null) {
+								currentTurtle = currentPlayer.getTurtle();
+							}
+							response = "using turtle "+currentTurtle.toString();
+							break;
 
-					case ID:
-						currentPlayer = playerList.get(t.getValue());
-						response = "using player " + currentPlayer.getId();
-						break;
+						case STRING:
+							if(currentTurtle != null) {
+								TurtleAction action = lexer.getAction(t.getValue());
+								System.out.println("performed action");
+								response = action != null ? action.perform(currentTurtle) : "unknow " + message;
+							}
+							break;
 
-					case STRING:
-						if(currentTurtle != null) {
-							TurtleAction action = lexer.getAction(t.getValue());
-							System.out.println("performed action");
-							response = action != null ? action.perform(currentTurtle) : "unknow " + message;
-						}
-						break;
+						case QUIT:
+							quit = true;
+							response = "bye";
+							break;
 
-					case QUIT:
-						quit = true;
-						response = "bye";
-						break;
+						case DIRECTION:
+							response = "direction ok "+t.getValue();
+							break;
 
-					case DIRECTION:
-						response = "direction ok "+t.getValue();
-						break;
-
-					default:
-						break;
+						default:
+							break;
+					}
 				}
 			}
 			socket.send(response);

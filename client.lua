@@ -31,5 +31,5 @@ sendrecv("ES")
 sendrecv("F")
 sendrecv("WN")
 
-sendrecv("quit")
+sendrecv("42 quit")
 
