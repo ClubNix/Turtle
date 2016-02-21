@@ -1,4 +1,4 @@
-CLASSPATH=/usr/share/java/jzmq.jar:.
+CLASSPATH=/usr/share/java/zmq.jar:.
 BUILD_DIR=build/
 JFLAGS=-Xlint:all -d ${BUILD_DIR} #-Wall -o build/*.class
 
